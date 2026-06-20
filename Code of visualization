@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# Sample data
+df = pd.DataFrame({
+    'product': ['Headphones', 'Watch', 'Stand', 'Case', 'Speaker', 'Keyboard', 'Mouse', 'Cable', 'Lamp', 'Monitor', 'Webcam', 'Mic', 'Stand2', 'Organizer', 'PowerBank'],
+    'rating': [5, 4, 3, 2, 5, 4, 5, 1, 4, 3, 2, 4, 5, 3, 4]
+})
+
+
+print("\n" + "="*50)
+print("🚀 TASK 3: DATA VISUALIZATION")
+print("="*50)
+
+
+# Plot 1: Bar Chart
+plt.figure(figsize=(10, 6))
+rating_counts = df['rating'].value_counts().sort_index()
+colors = ['#ff6b6b', '#ffa94d', '#ffd43b', '#74c0fc', '#51cf66']
+plt.bar(rating_counts.index, rating_counts.values, color=colors, edgecolor='black')
+plt.xlabel('Rating (Stars)')
+plt.ylabel('Number of Reviews')
+plt.title('Rating Distribution', fontsize=14, fontweight='bold')
+plt.xticks(rating_counts.index)
+for i, v in zip(rating_counts.index, rating_counts.values):
+    plt.text(i, v + 0.1, str(v), ha='center')
+plt.grid(axis='y', alpha=0.3)
+plt.savefig('rating_chart.png', dpi=300)
+print("✓ Saved: rating_chart.png")
+plt.show()
+
+
+# Plot 2: Pie Chart
+plt.figure(figsize=(8, 8))
+plt.pie(rating_counts.values, labels=[f'{i}★' for i in rating_counts.index], 
+        autopct='%1.1f%%', colors=colors, startangle=90)
+plt.title('Rating Percentage', fontsize=14, fontweight='bold')
+plt.savefig('rating_pie.png', dpi=300)
+print("✓ Saved: rating_pie.png")
+plt.show()
+
+
+print("\n" + "="*50)
+print("✅ TASK 3 COMPLETE!")
+print("="*50)
